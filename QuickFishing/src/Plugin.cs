@@ -14,7 +14,7 @@ public class Plugin : BasePlugin
     {
         // Plugin startup logic
 
-        Harmony.CreateAndPatchAll(typeof(Plugin));
+        Harmony.CreateAndPatchAll(typeof(Plugin).Assembly);
 
         Log = base.Log;
         Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");

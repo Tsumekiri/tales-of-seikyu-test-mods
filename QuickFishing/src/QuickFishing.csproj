@@ -19,8 +19,16 @@
     <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.*" IncludeAssets="compile"/>
     <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*"/>
   </ItemGroup>
+  <PropertyGroup>
+    <GameDir>$(HOME)/.local/share/Steam/steamapps/common/Tales of Seikyu</GameDir>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="$(HOME)/.local/share/Steam/steamapps/common/Tales of Seikyu/BepInEx/core/*.dll" Private="False"/>
-    <Reference Include="$(HOME)/.local/share/Steam/steamapps/common/Tales of Seikyu/BepInEx/interop/*.dll" Private="False"/>
+    <Reference Include="$(GameDir)/BepInEx/core/*.dll" Private="False"/>
+    <Reference Include="$(GameDir)/BepInEx/interop/*.dll" Private="False"/>
   </ItemGroup>
+  <Target Name="CopyDLLs" AfterTargets="Build">
+    <Message Text="Copying output..." Importance="High"/>
+    <Copy SourceFiles="$(TargetDir)/$(ProjectName).dll" DestinationFolder="$(GameDir)/BepInEx/plugins/"/>
+    <Message Text="Finished copying the output files." Importance="High"/>
+  </Target>
 </Project>
